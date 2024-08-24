@@ -3,41 +3,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const Form = () => {
-    const addProduct = () => 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Add"
-        }).then(async (result)  =>  {
-            if (result.isConfirmed) {
-                try {
-                    const token = localStorage.getItem('token');        
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    };
-
-                    const response = await axios.post('https://react-interview.1putym.easypanel.host/api/product');
-                    console.log('Product created successfully:', response);
-                    if (response.data.acknowledged) {
-                        Swal.fire({
-                            text: "Product added successfully.",
-                            icon: "success"
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error creating user:', error.response ? error.response.data : error.message);
-                }
-                   
-            }
-        });
-
-    }
+    const  addProduct=(async ()=>{
+        const response = await axios.post('https://react-interview.1putym.easypanel.host/api/product')
+        console.log(response);
+    })
     
     return (
         <form >
